@@ -1,6 +1,36 @@
 # Project Implementation Documentation
 
-This document provides a quick overview and setup instructions for my full-stack submission, covering the mandatory bug-squashing task and both optional modules.
+This project is a fully integrated notes management application. It features a robust Node.js/Express backend for data persistence and a responsive, modern Tailwind CSS dashboard for user interaction.
+
+## 🚀 Quick Start Guide
+
+Setting up the project is fully automated. Just follow these two steps from your terminal:
+
+## 1. Installation
+
+Open your terminal inside the root folder (popaya-assignment/) and run this command. It will automatically download all the necessary tools for both the frontend and the backend at once:
+
+##  **npm install**
+
+
+
+## 2. Launching the App
+
+Run this single command to start the entire system. It will spin up your backend and frontend simultaneously:
+
+
+## **npm run dev**
+
+
+
+Once running, you can access the app here:
+
+Backend API: http://localhost:5500
+
+Frontend Dashboard: http://localhost:59032
+
+
+
 
 ## 📁 Project Structure
 
@@ -42,8 +72,11 @@ The original codebase was crashing on startup. We brought it back to life with a
 We built a complete, robust Express API from scratch with a few clever upgrades:
 
 * **Full CRUD Support:** Added all 5 essential routes to create, read, update, and delete notes.
+
 * **Input Validation:** The server automatically blocks empty note titles with a `400 Bad Request` error to keep data clean.
+
 * **Automatic Timestamps:** Every note now tracks exactly when it was created and last updated using ISO strings.
+
 * **Live Search & Sorting:** Built a search filter into the `GET` route and sorted the list so your most recently edited notes always float to the top.
 
 ---
@@ -53,8 +86,11 @@ We built a complete, robust Express API from scratch with a few clever upgrades:
 We built a clean, fast web dashboard that syncs perfectly with our backend API:
 
 * **Modern Layout:** Styled the app with Tailwind CSS to make it fully responsive and look great on any screen.
+
 * **Smart Form:** Used a single form that smoothly shifts between "Create Note" and "Edit Note" modes depending on what you click.
+
 * **Smoother Search:** Added a tiny 300ms delay (debouncing) to the search bar so it waits for you to finish typing before asking the server for data.
+
 * **Safety First:** Added a confirmation popup before deleting notes, and included basic HTML sanitization to protect the app from malicious code injections.
 
 ---
@@ -64,5 +100,7 @@ We built a clean, fast web dashboard that syncs perfectly with our backend API:
 To make the app production-ready, we mapped out a scalable database schema in a `schema.sql` file:
 
 * **Connected Tables:** Set up separate tables for `users` and `notes`, linking them safely using foreign keys.
+
 * **Clean Deletions:** Configured `ON DELETE CASCADE` so if a user account is deleted, their notes are automatically cleaned up too.
+
 * **Built for Speed:** Added indexing recommendations to keep database searches and date sorting incredibly fast, even with thousands of notes.

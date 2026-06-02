@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
-  },
+  "start-backend": "cd backend/notes-api && npm start",
+  "start-frontend": "npx serve frontend/notes-ui"
+},
+
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2"

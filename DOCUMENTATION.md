@@ -4,7 +4,7 @@ This document provides a quick overview and setup instructions for my full-stack
 
 ## 📁 Project Structure
 
-```text
+
 popaya-assignment/
 ├── core/                  # 1. Core Task (Mandatory)
 │   └── buggy-code/
@@ -19,46 +19,84 @@ popaya-assignment/
     └── index.html
 
 
-**## 1. Core Task: Bug Fixes**
+
+## 🛠️ 1. Core Task: Bug Fixes
+
+The original script was broken and would crash on startup. We got it running smoothly by making the following updates:
+
+* ### Fixing Typos
+  Corrected broken property references across the script, such as changing `.lenght` to `.length`.
 
 
-The original script was broken and would crash on startup. We got it running smoothly by:
+* ### Correcting Variable Scopes
+  Fixed misnamed variables so all data points and objects connect properly without throwing reference errors.
 
-Fixing typos (like changing .lenght to .length).
 
-Correcting misnamed variables so everything connects properly.
+* ### Strict Type Evaluations
+  Swapped in strict comparisons (`===`) to ensure 100% accurate data matching and routing.
 
-Swapping in strict comparisons (===) to ensure accurate data matching.
+  
+* ### Server Return Statements
+  Added missing return blocks inside the Express route handlers so the server never hangs up on a request.
 
-Adding proper return statements so the server never hangs.
+---
 
-2. Backend Task: API Upgrades
-We built the complete Express API from scratch with a few professional upgrades:
+## ⚙️ 2. Backend Task: API Upgrades
 
-Full CRUD: Created all 5 required endpoints (GET, POST, PUT, DELETE).
+We built the complete Express API from scratch with several professional upgrades:
 
-Validation: Rejects requests with a 400 error if a title is missing, preventing blank notes.
 
-Smart Timestamps: Automatically tracks and updates createdAt and updatedAt timestamps.
 
-Live Search & Sort: Added a substring search engine and sorted the notes so the newest or most recently edited items always appear at the top.
+* ### Full CRUD Engine
+  Created all 5 required REST endpoints (`GET /notes`, `POST /notes`, `GET /notes/:id`, `PUT /notes/:id`, `DELETE /notes/:id`).
 
-3. Frontend Task: Interactive UI
-We built a responsive, fast user interface that syncs perfectly with the backend:
 
-Tailwind CSS: Designed a modern, clean dashboard that looks great on both mobile and desktop.
 
-Smart Form: Used a single form that seamlessly switches between "Create Note" and "Edit Note" modes.
+* ### Input Field Validation
+  The server actively rejects requests with a `400 Bad Request` error if a note title is missing, keeping the data clean.
 
-Optimized Search: Added a tiny 300ms delay to the search bar so it waits until you finish typing before hitting the server.
 
-Safety & Security: Added a confirmation prompt before deleting items and put in basic HTML sanitization to protect against XSS attacks.
+* ### Smart Metadata Timestamps
+  Automatically generates and updates ISO strings for both `createdAt` and `updatedAt` timestamps.
 
-4. Database Design: Relational Blueprint
-To make the project production-ready, we added a schema.sql design file that features:
 
-Clear relational tables for users and notes linked with foreign keys.
+* ### Live Search & Sorting
+  Added a substring search query filter and sorted the array response so the newest or most recently edited items always stay at the top.
 
-A cascade delete setup (ON DELETE CASCADE) to clean up a user's notes automatically if their account is deleted.
+---
 
-Performance indexes to keep note searching and timestamp sorting lightning-fast as the data grows.
+## 💻 3. Frontend Task: Interactive UI
+
+We built a responsive, fast user interface that synchronizes perfectly with our custom backend:
+
+* ### Tailwind CSS Layout
+  Designed a modern, clean dashboard interface that looks great on mobile, tablet, and desktop viewports.
+
+
+* ### Smart Dynamic Form
+  Utilized a single, reactive form that seamlessly changes contexts between "Create Note" and "Edit Note" modes depending on user actions.
+
+
+* ### Optimized Query Search
+  Added a 300ms delay (debouncing) to the search input field so it waits until the user finishes typing before hitting the server.
+
+
+* ### Safety & Client Security
+  Integrated native browser confirmation pop-ups before destructive deletions and included basic HTML sanitization to protect against XSS injection vulnerabilities.
+
+---
+
+## 🗄️ 4. Database Design: Relational Blueprint
+
+To make the architecture production-ready, we designed a `schema.sql` file that maps out scalable data storage:
+
+* ### Relational Integrity
+  Created distinct structures for `users` and `notes` tables linked securely via Foreign Key constraints.
+
+
+* ### Cascading Deletions
+  Configured an `ON DELETE CASCADE` rule to automatically purge orphaned notes if a parent user profile is dropped.
+
+
+* ### Performance Indexing
+  Added structural index recommendations (B-Tree and GIN text vectors) to keep full-text searching and chronological sorting blazing fast.

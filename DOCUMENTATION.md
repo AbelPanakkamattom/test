@@ -6,97 +6,63 @@ This document provides a quick overview and setup instructions for my full-stack
 
 
 popaya-assignment/
-├── core/                  # 1. Core Task (Mandatory)
+├── core/                  # Task 1: Bug Fixes (Mandatory)
 │   └── buggy-code/
 │       └── debugging-assignment.js
-├── backend/               # 2. Backend Task (Optional)
+│
+├── backend/               # Task 2: Express Backend API
 │   └── notes-api/
 │       ├── package.json
-│       ├── server.js
-│       └── schema.sql     # Database Schema Design
-└── frontend/              # 3. Frontend Task (Optional)
-    ├── app.js
-    └── index.html
-
-
-
-## 🛠️ 1. Core Task: Bug Fixes
-
-The original script was broken and would crash on startup. We got it running smoothly by making the following updates:
-
-* ### Fixing Typos
-  Corrected broken property references across the script, such as changing `.lenght` to `.length`.
-
-
-* ### Correcting Variable Scopes
-  Fixed misnamed variables so all data points and objects connect properly without throwing reference errors.
-
-
-* ### Strict Type Evaluations
-  Swapped in strict comparisons (`===`) to ensure 100% accurate data matching and routing.
-
-  
-* ### Server Return Statements
-  Added missing return blocks inside the Express route handlers so the server never hangs up on a request.
+│       ├── server.js      <-- Main Server File
+│       └── schema.sql     <-- Database Schema Design
+│
+└── frontend/              # Task 3: Interactive Dashboard UI
+    └── notes-ui/
+        ├── index.html     <-- View Layout
+        └── app.js         <-- Fetch & Logic Handler
 
 ---
 
-## ⚙️ 2. Backend Task: API Upgrades
+## 🛠️ 1. Fixing the Bugs
 
-We built the complete Express API from scratch with several professional upgrades:
+The original codebase was crashing on startup. We brought it back to life with a few critical fixes:
 
+* **Fixed Typos:** Cleaned up broken syntax across the scripts (like fixing `.lenght` to `.length`).
 
+* **Fixed Variable Scopes:** Connected misnamed variables so objects can talk to each other without throwing reference errors.
 
-* ### Full CRUD Engine
-  Created all 5 required REST endpoints (`GET /notes`, `POST /notes`, `GET /notes/:id`, `PUT /notes/:id`, `DELETE /notes/:id`).
+* **Safer Matching:** Swapped in strict comparisons (`===`) to ensure accurate data matching.
 
-
-
-* ### Input Field Validation
-  The server actively rejects requests with a `400 Bad Request` error if a note title is missing, keeping the data clean.
-
-
-* ### Smart Metadata Timestamps
-  Automatically generates and updates ISO strings for both `createdAt` and `updatedAt` timestamps.
-
-
-* ### Live Search & Sorting
-  Added a substring search query filter and sorted the array response so the newest or most recently edited items always stay at the top.
+* **No More Hanging Server:** Added missing `return` statements in the Express routes so requests never get stuck waiting for a response.
 
 ---
 
-## 💻 3. Frontend Task: Interactive UI
+## ⚙️ 2. Upgrading the Backend API
 
-We built a responsive, fast user interface that synchronizes perfectly with our custom backend:
+We built a complete, robust Express API from scratch with a few clever upgrades:
 
-* ### Tailwind CSS Layout
-  Designed a modern, clean dashboard interface that looks great on mobile, tablet, and desktop viewports.
-
-
-* ### Smart Dynamic Form
-  Utilized a single, reactive form that seamlessly changes contexts between "Create Note" and "Edit Note" modes depending on user actions.
-
-
-* ### Optimized Query Search
-  Added a 300ms delay (debouncing) to the search input field so it waits until the user finishes typing before hitting the server.
-
-
-* ### Safety & Client Security
-  Integrated native browser confirmation pop-ups before destructive deletions and included basic HTML sanitization to protect against XSS injection vulnerabilities.
+* **Full CRUD Support:** Added all 5 essential routes to create, read, update, and delete notes.
+* **Input Validation:** The server automatically blocks empty note titles with a `400 Bad Request` error to keep data clean.
+* **Automatic Timestamps:** Every note now tracks exactly when it was created and last updated using ISO strings.
+* **Live Search & Sorting:** Built a search filter into the `GET` route and sorted the list so your most recently edited notes always float to the top.
 
 ---
 
-## 🗄️ 4. Database Design: Relational Blueprint
+## 💻 3. Polishing the Frontend UI
 
-To make the architecture production-ready, we designed a `schema.sql` file that maps out scalable data storage:
+We built a clean, fast web dashboard that syncs perfectly with our backend API:
 
-* ### Relational Integrity
-  Created distinct structures for `users` and `notes` tables linked securely via Foreign Key constraints.
+* **Modern Layout:** Styled the app with Tailwind CSS to make it fully responsive and look great on any screen.
+* **Smart Form:** Used a single form that smoothly shifts between "Create Note" and "Edit Note" modes depending on what you click.
+* **Smoother Search:** Added a tiny 300ms delay (debouncing) to the search bar so it waits for you to finish typing before asking the server for data.
+* **Safety First:** Added a confirmation popup before deleting notes, and included basic HTML sanitization to protect the app from malicious code injections.
 
+---
 
-* ### Cascading Deletions
-  Configured an `ON DELETE CASCADE` rule to automatically purge orphaned notes if a parent user profile is dropped.
+## 🗄️ 4. Designing the Database Blueprint
 
+To make the app production-ready, we mapped out a scalable database schema in a `schema.sql` file:
 
-* ### Performance Indexing
-  Added structural index recommendations (B-Tree and GIN text vectors) to keep full-text searching and chronological sorting blazing fast.
+* **Connected Tables:** Set up separate tables for `users` and `notes`, linking them safely using foreign keys.
+* **Clean Deletions:** Configured `ON DELETE CASCADE` so if a user account is deleted, their notes are automatically cleaned up too.
+* **Built for Speed:** Added indexing recommendations to keep database searches and date sorting incredibly fast, even with thousands of notes.

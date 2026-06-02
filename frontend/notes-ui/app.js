@@ -14,6 +14,7 @@ const formAlert = document.getElementById("formAlert");
 
 let searchDebounceTimeout = null;
 
+// Display visual notifications for user CRUD operations
 function showAlert(message, isError = true) {
   formAlert.textContent = message;
   formAlert.className = `p-3 rounded-lg text-xs font-medium ${
@@ -109,8 +110,14 @@ noteForm.addEventListener("submit", async (e) => {
     });
 
     if (!response.ok) {
-      const data = await response.json();
-      throw new Error(data.error || "Failed to process operations.");
+      let errorMessage = "Failed to process operations.";
+      try {
+        const data = await response.json();
+        errorMessage = data.error || errorMessage;
+      } catch (_) {
+        // Fallback for non-JSON or missing error payloads
+      }
+      throw new Error(errorMessage);
     }
 
     showAlert(isEditing ? "Note updated successfully!" : "Note captured successfully!", false);
@@ -122,6 +129,7 @@ noteForm.addEventListener("submit", async (e) => {
   }
 });
 
+// Bind UI action targets to global runtime context scope
 async function prepareEditContext(id) {
   try {
     const response = await fetch(`${API_BASE_URL}/notes/${id}`);
@@ -152,6 +160,11 @@ async function executeDeleteContext(id) {
   }
 }
 
+// Attach action scopes to global execution space for inline template attributes
+window.prepareEditContext = prepareEditContext;
+window.executeDeleteContext = executeDeleteContext;
+
+// Handle Input/Search Queries safely with a Debouncer
 searchInput.addEventListener("input", (e) => {
   clearTimeout(searchDebounceTimeout);
   searchDebounceTimeout = setTimeout(() => {
@@ -175,4 +188,5 @@ function escapeHTML(str) {
   );
 }
 
+// Initial Run-loop execution mapping invocation
 fetchAndRenderNotes();

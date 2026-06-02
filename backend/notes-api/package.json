@@ -1,14 +1,20 @@
 {
   "name": "notes-backend-api",
   "version": "1.0.0",
-  "main": "server.js",
+  "description": "Fullstack Notes Management Application Workspace",
+  "main": "backend/notes-api/server.js",
   "scripts": {
-  "start-backend": "cd backend/notes-api && npm start",
-  "start-frontend": "npx serve frontend/notes-ui"
-},
-
+    "start-backend": "cd backend/notes-api && npm start",
+    "start-frontend": "npx serve frontend/notes-ui"
+  },
+  "keywords": [],
+  "author": "Abel Sabu",
+  "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.3"
   }
 }
